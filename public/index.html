@@ -26,12 +26,12 @@
              				{ "id": "author", "header": "Author Email", "fillspace": true, "hidden": false, "template": (obj) => {return getAuthorFieldValue(obj, "email")} },
              				{ "id": "author", "header": "Author Website", "fillspace": true, "hidden": false, "template": (obj) => {return getAuthorFieldValue(obj, "website")} },
                     { id:"",
-                     template:"<input class='delbtn' style='background-color: red; color: white' type='button' value='Delete'>",
+                     template:"<input class='delbtn' style='background-color: red; color: white; cursor: pointer' type='button' value='Delete'>",
                      css:"padding_less",
                      width:100
                      },
                     { id:"",
-                     template:"<input class='editbtn' style='background-color: #007bff; color: white' type='button' value='Edit'>",
+                     template:"<input class='editbtn' style='background-color: #007bff; color: white; cursor: pointer' type='button' value='Edit'>",
                      css:"padding_less",
                      width:100
                     }
@@ -128,45 +128,74 @@
       return false;
     };
 
+    let myForm = null;
+
     $$(1570449720005).on_click.editbtn= async function(e, id, trg){
       //id.column - column id
       //block default onclick event
-      const item = await webix.ajax().get(`http://localhost:1337/books/${id}`);
-      webix.modalbox({
-          title:"Edit Item",
-          buttons:["Yes", "No"],
-          text: generateEditHtml(item.json()),
-          width:500
-      });
-      return false;
+      let item = await webix.ajax().get(`http://localhost:1337/books/${id}`);
+      item = item.json();
+      if(!myForm) {
+              myForm = webix.ui({
+                view: "window", modal:true,
+                head: "Edit Item",
+                position: "center",
+                body: {
+                  view: "form",
+                  elements: [
+                    { view: "label", label: `id ${item._id}`},
+                    { view: "label", label: 'BOOK DETAILS' },
+                    { view: "text", label: 'Book Name', name: "bookName", value: item.bookName },
+                    { view: "text", label: 'Book Cover', name: "bookCover", value: item.bookCover },
+                    { view: "datepicker", label: 'Date Published', name: "publishedDate", value: item.publishedDate.toString().substring(0, 10).split().reverse().join() },
+                    { view: "counter", label: 'Price', name: "price", value: item.price },
+                    { view: "label", label: 'AUTHOR DETAILS' },
+                    { view: "text", label: 'Name', name: "author[name]", value: item.author.name },
+                    { view: "text", label: 'Email', name: "author[email]", value: item.author.email },
+                    { view: "text", label: 'Website', name: "author[website]", value: item.author.website },
+                    { view: "button", value: "Submit" },
+                    { view: "button", value: "Cancel", id: "cancelModal", "click": (e, id, trg) => {cancelModal(id, e)} }
+                  ],
+                  elementsConfig: {
+                    labelPosition: "top",
+                  }
+                }
+              });
+      }
+       myForm.show();
     };
 
-    generateEditHtml = (item) => {
+    cancelModal = () => {
+      myForm.hide();
+    };
+
+/*    generateEditHtml = (item) => {
       const d = item.publishedDate.toString().substring(0,10).split().reverse().join();
      return (`
+     <form enctype="application/json">
      <div>
         <div>
         <label>
             Book Name:
-            <input type="text" value='${item.bookName}'/>
+            <input name="bookName" type="text" value='${item.bookName}'/>
         </label>
         </div>
         <div>
         <label>
             Price:
-            <input type="text" value='${item.price}'/>
+            <input name="price" type="text" value='${item.price}'/>
         </label>
         </div>
         <div>
         <div>
         <label>
             Book Cover:
-            <input type="text" value='${item.bookCover}'/>
+            <input name="bookCover" type="text" value='${item.bookCover}'/>
         </label>
         </div>
         <label>
             Published Date:
-            <input type="date" value='${d}'/>
+            <input name="publishedDate" type="date" value='${d}'/>
         </label>
         </div>
         <div>
@@ -174,25 +203,26 @@
             <div>
             <label>
                 Author Name:
-                <input type="text" value='${item.author.name}'/>
+                <input name="author[name]" type="text" value='${item.author.name}'/>
             </label>
             </div>
             <div>
             <label>
                 Author Email:
-                <input type="text" value='${item.author.email}'/>
+                <input name="author[email]" type="text" value='${item.author.email}'/>
             </label>
             </div>
             <div>
             <label>
                 Author Website:
-                <input type="text" value='${item.author.website}'/>
+                <input name="author[website]" type="text" value='${item.author.website}'/>
             </label>
             </div>
         </div>
      </div>
+     </form>
      `);
-    }
+    }*/
   </script>
   </body>
 </html>

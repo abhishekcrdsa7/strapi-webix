@@ -64,7 +64,8 @@ module.exports = {
    */
 
   update: async (ctx, next) => {
-    return strapi.services.book.edit(ctx.params, ctx.request.body) ;
+    console.log("+++++++++++++++++++",ctx.request.body);
+    //return strapi.services.book.edit(ctx.params, ctx.request.body) ;
   },
 
   /**
