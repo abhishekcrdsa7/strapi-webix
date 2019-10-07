@@ -1,0 +1,19 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "strapi-hook-mongoose",
+      "settings": {
+        "client": "mongo",
+        "host": "ds331548.mlab.com",
+        "port": "31548",
+        "database": "internshipstrapi",
+        "username": "abhishek",
+        "password": "abhishek7"
+      },
+      "options": {
+        "authenticationDatabase": "internshipstrapi"
+      }
+    }
+  }
+}

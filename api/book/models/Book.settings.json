@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "book",
+  "info": {
+    "name": "book",
+    "description": "table of books"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "bookName": {
+      "required": true,
+      "type": "string"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "publishedDate": {
+      "type": "date"
+    },
+    "author": {
+      "type": "json"
+    },
+    "bookCover": {
+      "type": "string"
+    }
+  }
+}
