@@ -53,6 +53,7 @@ module.exports = {
    */
 
   create: async (ctx) => {
+    ctx.request.body.author = JSON.parse(ctx.request.body.author);
     return strapi.services.book.add(ctx.request.body);
   },
 
