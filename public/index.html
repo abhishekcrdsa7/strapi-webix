@@ -30,7 +30,7 @@
                      width:100
                      },
                     { id:"",
-                     template:"<input class='addbtn' type='button' value='Edit'>",
+                     template:"<input class='editbtn' type='button' value='Edit'>",
                      css:"padding_less",
                      width:100
                     }
@@ -84,7 +84,92 @@
        return "";
     };
 
-    $$(1570449720005).load('http://localhost:1337/books')
+    $$(1570449720005).load('http://localhost:1337/books');
+
+    $$(1570449720005).on_click.delbtn= async function(e, id, trg){
+      //block default onclick event
+      const result = await webix.modalbox({
+          title:`Delete Item`,
+          buttons:["Yes", "No"],
+          text:`Are you sure you want to delete the item with id\n${id}`,
+          width:500
+      });
+      if(result === 0) {
+       const result = await webix.ajax().del(`http://localhost:1337/books/${id}`);
+       if(result) {
+        $$(1570449720005).clearAll();
+        $$(1570449720005).load('http://localhost:1337/books');
+       }
+
+      }
+      return false;
+    };
+
+    $$(1570449720005).on_click.editbtn= async function(e, id, trg){
+      //id.column - column id
+      //block default onclick event
+      const item = await webix.ajax().get(`http://localhost:1337/books/${id}`);
+      webix.modalbox({
+          title:"Edit Item",
+          buttons:["Yes", "No"],
+          text: generateEditHtml(item.json()),
+          width:500
+      });
+      return false;
+    };
+
+    generateEditHtml = (item) => {
+      const d = item.publishedDate.toString().substring(0,10).split().reverse().join();
+     return (`
+     <div>
+        <div>
+        <label>
+            Book Name:
+            <input type="text" value='${item.bookName}'/>
+        </label>
+        </div>
+        <div>
+        <label>
+            Price:
+            <input type="text" value='${item.price}'/>
+        </label>
+        </div>
+        <div>
+        <div>
+        <label>
+            Book Cover:
+            <input type="text" value='${item.bookCover}'/>
+        </label>
+        </div>
+        <label>
+            Published Date:
+            <input type="date" value='${d}'/>
+        </label>
+        </div>
+        <div>
+            <h3>Author Details</h3>
+            <div>
+            <label>
+                Author Name:
+                <input type="text" value='${item.author.name}'/>
+            </label>
+            </div>
+            <div>
+            <label>
+                Author Email:
+                <input type="text" value='${item.author.email}'/>
+            </label>
+            </div>
+            <div>
+            <label>
+                Author Website:
+                <input type="text" value='${item.author.website}'/>
+            </label>
+            </div>
+        </div>
+     </div>
+     `);
+    }
   </script>
   </body>
 </html>
