@@ -12,19 +12,19 @@
   <body lang="en">
   <script>
     webix.ui({
-             	"id": "mylist",
-             	"rows": [
+             	id: "mylist",
+             	rows: [
              		{
              		  // "url": "",
-             			"columns": [
-             				{ "id": "id", "header": "ID", "fillspace": true, "hidden": false },
-             				{ "header": "Book Name", "fillspace": true, "hidden": false, "sort": "string", "id": "bookName" },
-             				{ "header": "Book Cover", "fillspace": true, "hidden": false, "sort": "string", "id": "bookCover" },
-             				{ "header": "Price", "fillspace": false, "hidden": false, "id": "price" },
-             				{ "header": "Published Date(YYYY/MM/DD)", "fillspace": true, "hidden": false, "id": "publishedDate", "template": (obj) => {return obj.publishedDate.toString().substring(0,10)} },
-             				{ "id": "author", "header": "Author Name", "fillspace": true, "hidden": false, "template": (obj) => {return getAuthorFieldValue(obj, "name")}},
-             				{ "id": "author", "header": "Author Email", "fillspace": true, "hidden": false, "template": (obj) => {return getAuthorFieldValue(obj, "email")} },
-             				{ "id": "author", "header": "Author Website", "fillspace": true, "hidden": false, "template": (obj) => {return getAuthorFieldValue(obj, "website")} },
+             			columns: [
+             				{ id: "id", header: "ID", fillspace: true, hidden: false },
+             				{ header: "Book Name", fillspace: true, hidden: false, sort: "string", id: "bookName" },
+             				{ header: "Book Cover", fillspace: true, hidden: false, sort: "string", id: "bookCover" },
+             				{ header: "Price", fillspace: false, hidden: false, id: "price" },
+             				{ header: "Published Date(YYYY/MM/DD)", fillspace: true, hidden: false, id: "publishedDate", template: (obj) => {return obj.publishedDate.toString().substring(0,10)} },
+             				{ id: "author", header: "Author Name", fillspace: true, hidden: false, template: (obj) => {return getAuthorFieldValue(obj, "name")}},
+             				{ id: "author", header: "Author Email", fillspace: true, hidden: false, template: (obj) => {return getAuthorFieldValue(obj, "email")} },
+             				{ id: "author", header: "Author Website", fillspace: true, hidden: false, template: (obj) => {return getAuthorFieldValue(obj, "website")} },
                     { id:"",
                      template:"<input class='delbtn' style='background-color: red; color: white; cursor: pointer' type='button' value='Delete'>",
                      css:"padding_less",
@@ -36,52 +36,53 @@
                      width:100
                     }
              			],
-             			"view": "datatable",
-             			"fixedRowHeight": true,
-             			"id": 1570449720005
+             			view: "datatable",
+             			fixedRowHeight: true,
+             			id: 1570449720005
              		},
-             		{ "template": "<h1 style='padding-left: 65px'>ADD BOOK</h1>", "view": "label", "height": 50 },
+             		{ template: "<h1 style='padding-left: 65px'>ADD BOOK</h1>", "view": "label", "height": 50 },
              		{
-             		  "padding": { "left": 50 },
-             			"cols": [
+             		  padding: { "left": 50 },
+             			cols: [
              				{
-             					"autoheight": false,
-             					"view": "form",
-             					"rows": [
-             					  { "label": "BOOK DETAILS", "view": "label" },
-             						{ "label": "NAME", "view": "text", "height": 38, "required": true, "id": "bookName"},
-             						{ "label": "PRICE", "view": "counter", "height": 38, "required": false, "id": "price", "value": 0},
+             					autoheight: false,
+             					view: "form",
+             					rows: [
+             					  { label: "BOOK DETAILS", view: "label" },
+             						{ label: "NAME", view: "text", height: 38, required: true, id: "bookName"},
+             						{ label: "PRICE", view: "counter", height: 38, required: false, id: "price", value: 0},
              						{
-             							"cols": [
-             								{ "label": "COVER IMG URL", "view": "label", "height": 0, "width": 111 },
-             								{ "view": "text", "width": 0, "invalid": false, "required": false, "id": "bookCover"}
+             							cols: [
+             								{ label: "COVER IMG URL", view: "label", height: 0, width: 111 },
+             								{ view: "text", width: 0, invalid: false, required: false, id: "bookCover"}
              							]
              						},
              						{
-             							"height": 38,
-             							"cols": [
-             								{ "label": "PUBLISHED DATE", "view": "label", "height": 0, "width": 123 },
-             								{ "value": "2019-10-07 17:31:47", "view": "datepicker", "height": 0, "width": 0 , "id": "publishedDate"}
+             							height: 38,
+             							cols: [
+             								{ label: "PUBLISHED DATE", view: "label", height: 0, width: 123 },
+             								{ value: "2019-10-07 17:31:47", view: "datepicker", height: 0, width: 0 , id: "publishedDate"}
              							]
              						},
-             						{ "view": "button", "css": "webix_primary", "label": "Save", "id": "saveButton", "click": (e, id, trg) => {onSaveButtonClick(id, e)}}
+             						{ view: "button", css: "webix_primary", label: "Save", id: "saveButton", click: (e, id, trg) => {onSaveButtonClick(id, e)}}
              					],
-             					"borderless": 1
+             					borderless: 1
              				},
              				{
-             				  "padding": { "top": 25, "right": 50 },
-             					"rows": [
-             						{ "label": "AUTHOR DETAILS", "view": "label" },
-             						{ "label": "NAME", "view": "text", "id": "author_name"},
-             						{ "label": "EMAIL", "view": "text", "id": "author_email" },
-             						{ "label": "WEBSITE", "view": "text", "id": "author_website" },
-             						{ "view": "template", "role": "placeholder", "borderless": 1 },
+             				  padding: { top: 25, right: 50 },
+             					rows: [
+             						{ label: "AUTHOR DETAILS", view: "label" },
+             						{ label: "NAME", view: "text", id: "author_name"},
+             						{ label: "EMAIL", view: "text", id: "author_email" },
+             						{ label: "WEBSITE", view: "text", id: "author_website" },
+             						{ view: "template", role: "placeholder", borderless: 1 },
              					]
              				}
              			]
              		}
              	]
              });
+
     getAuthorFieldValue = (obj, key) => {
        if(obj.author) {
          return obj.author[key] || "";
@@ -110,7 +111,6 @@
     $$(1570449720005).load('http://localhost:1337/books');
 
     $$(1570449720005).on_click.delbtn= async function(e, id, trg){
-      //block default onclick event
       const result = await webix.modalbox({
           title:`Delete Item`,
           buttons:["Yes", "No"],
@@ -131,8 +131,6 @@
     let myForm = null;
 
     $$(1570449720005).on_click.editbtn= async function(e, id, trg){
-      //id.column - column id
-      //block default onclick event
       let item = await webix.ajax().get(`http://localhost:1337/books/${id}`);
       item = item.json();
       if(!myForm) {
@@ -142,6 +140,7 @@
                 position: "center",
                 body: {
                   view: "form",
+                  id: "editForm",
                   elements: [
                     { view: "label", label: `id ${item._id}`},
                     { view: "label", label: 'BOOK DETAILS' },
@@ -153,8 +152,8 @@
                     { view: "text", label: 'Name', name: "author[name]", value: item.author.name },
                     { view: "text", label: 'Email', name: "author[email]", value: item.author.email },
                     { view: "text", label: 'Website', name: "author[website]", value: item.author.website },
-                    { view: "button", value: "Submit" },
-                    { view: "button", value: "Cancel", id: "cancelModal", "click": (e, id, trg) => {cancelModal(id, e)} }
+                    { view: "button", value: "Submit", id: "submitEditForm", click: () => {submitEditForm(item._id)}},
+                    { view: "button", value: "Cancel", id: "cancelModal", click: () => {cancelModal()} }
                   ],
                   elementsConfig: {
                     labelPosition: "top",
@@ -165,64 +164,18 @@
        myForm.show();
     };
 
+    submitEditForm = async (id) => {
+      const values = $$("editForm").getValues();
+      const result = await webix.ajax().put(`http://localhost:1337/books/${id}`, values);
+      myForm.hide();
+      $$(1570449720005).clearAll();
+      $$(1570449720005).load('http://localhost:1337/books');
+    };
+
     cancelModal = () => {
       myForm.hide();
     };
 
-/*    generateEditHtml = (item) => {
-      const d = item.publishedDate.toString().substring(0,10).split().reverse().join();
-     return (`
-     <form enctype="application/json">
-     <div>
-        <div>
-        <label>
-            Book Name:
-            <input name="bookName" type="text" value='${item.bookName}'/>
-        </label>
-        </div>
-        <div>
-        <label>
-            Price:
-            <input name="price" type="text" value='${item.price}'/>
-        </label>
-        </div>
-        <div>
-        <div>
-        <label>
-            Book Cover:
-            <input name="bookCover" type="text" value='${item.bookCover}'/>
-        </label>
-        </div>
-        <label>
-            Published Date:
-            <input name="publishedDate" type="date" value='${d}'/>
-        </label>
-        </div>
-        <div>
-            <h3>Author Details</h3>
-            <div>
-            <label>
-                Author Name:
-                <input name="author[name]" type="text" value='${item.author.name}'/>
-            </label>
-            </div>
-            <div>
-            <label>
-                Author Email:
-                <input name="author[email]" type="text" value='${item.author.email}'/>
-            </label>
-            </div>
-            <div>
-            <label>
-                Author Website:
-                <input name="author[website]" type="text" value='${item.author.website}'/>
-            </label>
-            </div>
-        </div>
-     </div>
-     </form>
-     `);
-    }*/
   </script>
   </body>
 </html>
