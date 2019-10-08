@@ -54,7 +54,11 @@ module.exports = {
 
   create: async (ctx) => {
     ctx.request.body.author = JSON.parse(ctx.request.body.author);
-    return strapi.services.book.add(ctx.request.body);
+    try{
+      return strapi.services.book.add(ctx.request.body);
+    }catch (e) {
+      return e;
+    }
   },
 
   /**
@@ -67,7 +71,12 @@ module.exports = {
     let publishedDate = new Date(ctx.request.body.publishedDate);
     publishedDate.setDate(publishedDate.getDate() + 1);
     ctx.request.body.publishedDate = publishedDate;
-    return strapi.services.book.edit(ctx.params, ctx.request.body) ;
+    try {
+      return strapi.services.book.edit(ctx.params, ctx.request.body) ;
+    } catch(e) {
+      return e;
+    }
+
   },
 
   /**
